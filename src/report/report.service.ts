@@ -39,6 +39,7 @@ export class ReportService {
                 .find()
                 .populate('coordinates')
                 .populate("author")
+                .sort({createdAt: -1})
                 .exec();
             // go through all reports and remove password and salt from author
             reports.forEach((report) => {

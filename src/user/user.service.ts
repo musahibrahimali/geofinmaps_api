@@ -260,7 +260,7 @@ export class UserService {
     // get all user profiles
     private async getAllUserProfiles(): Promise<ProfileInfoDto[]> {
         try{
-            const users = await this.userModel.find();
+            const users = await this.userModel.find().sort({createdAt: -1});
             return users.map(user => {
                 const defaultImage = "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y";
                 let profileImage: string;

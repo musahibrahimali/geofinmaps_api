@@ -75,7 +75,8 @@ export class CableService {
     async getAllCables(): Promise<ICable[] | any> {
         try{
             // find all the cables and populate the coordinates
-            return await this.cableModel.find().populate('coord').exec();
+            // sort the cables based on the createdAt field
+            return await this.cableModel.find().populate('coord').sort({createdAt: -1}).exec();
         }catch (error){
             return error;
         }
