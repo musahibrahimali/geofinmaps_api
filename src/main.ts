@@ -49,5 +49,5 @@ const bootstrap = async () => {
         console.log("There was an error starting server. ", err);
     });
 }
-bootstrap().then();
+bootstrap().then(() => console.log());
 
