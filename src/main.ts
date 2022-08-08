@@ -7,7 +7,7 @@ import { ValidationPipe, VersioningType } from '@nestjs/common';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 
-const bootstrap = async () => {
+async function bootstrap() {
     const app = await NestFactory.create<NestExpressApplication>(AppModule, {
         logger: ['error', 'warn', 'debug', 'verbose'],
     });
