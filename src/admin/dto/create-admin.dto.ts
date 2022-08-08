@@ -1,4 +1,4 @@
-export class CreateUserDto {
+export class CreateAdminDto {
     socialId?: string;
     username: string;
     password?: string;

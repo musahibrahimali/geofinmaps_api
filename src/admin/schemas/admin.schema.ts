@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { IsBoolean, IsString } from "class-validator";
 
-export type UserModel = User & Document;
+export type AdminModel = Admin & Document;
 
 @Schema({ timestamps: true })
-export class User {
+export class Admin {
     @IsString()
     @Prop({ required: false, default: '' })
     socialId: string;
@@ -73,16 +73,12 @@ export class User {
     image: string;
 
     @IsString()
-    @Prop({ required: false, default: ["user"] })
+    @Prop({ required: false, default: ["user", "admin"] })
     roles: string[];
 
     @IsBoolean()
-    @Prop({ required: false, default: false })
-    isOnline: boolean;
-
-    @IsBoolean()
-    @Prop({ required: false, default: false })
+    @Prop({ required: false, default: true })
     isAdmin: boolean;
 }
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const AdminSchema = SchemaFactory.createForClass(Admin);

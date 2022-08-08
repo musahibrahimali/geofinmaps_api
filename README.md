@@ -24,6 +24,14 @@
 
 ## Description
 
+### Instructions
+- rename the .env.example to .env 
+- set the `NODE_ENV` to `development` or `production`
+- add the required environment variables values
+- run `yarn insall` or `npm install`
+- run `yarn start` or `npm start` fro production mode
+- run `yarn build` or `npm build` for production mode
+- run `yarn start:dev` or `npm start:dev` for development mode
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation

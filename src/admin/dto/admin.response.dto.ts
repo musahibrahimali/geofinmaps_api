@@ -1,4 +1,4 @@
-export class UserResponseDto{
+export class AdminResponseDto{
     socialId: string;
     username: string;
     password: string;
