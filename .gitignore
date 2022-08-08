@@ -39,3 +39,9 @@ uploads/
 
 # IDE - VS
 .vs/
+
+# environment variables
+.env
+.env.production
+.env.test
+.env.local
