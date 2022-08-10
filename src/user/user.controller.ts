@@ -123,7 +123,7 @@ export class UserController {
     // update profile picture
     @ApiCreatedResponse({type: ProfileInfoDto, description:"Profile picture updated"})
     @UseGuards(JwtAuthGuard)
-    @Post('update-profile-picture/:id')
+    @Patch('update-profile-picture/:id')
     @UseInterceptors(FileInterceptor('file', {dest: 'uploads/'}))
     async updateProfilePicture(@Param('id') id: string, @UploadedFile() file: Express.Multer.File | any):Promise<string | any>{
         // const fileId: string = file.id;
