@@ -37,6 +37,11 @@ export class Report{
     @Prop({required: true, type: [{type: mongoose.Schema.Types.ObjectId, ref: Cable.name}]})
     @Type(() => Cable)
     cable: Cable;
+
+    // report date
+    @Prop({required: true})
+    @Type(() => Date)
+    reportDate: Date;
 }
 
 export const ReportSchema = SchemaFactory.createForClass(Report);

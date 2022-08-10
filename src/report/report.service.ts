@@ -5,7 +5,6 @@ import {Model} from "mongoose";
 import {CoordinateService} from "../coordinate/coordinate.service";
 import {ReportResponseDto} from "./dto/report-response.dto";
 import {CreateReportDto} from "./dto/create-report.dto";
-import {CreateCoordinateDto} from "../coordinate/dto/create-coordinate.dto";
 
 @Injectable()
 export class ReportService {
@@ -17,15 +16,7 @@ export class ReportService {
     // Create a new report
     async createReport(createReportDto: CreateReportDto): Promise<ReportResponseDto | any> {
         try{
-            const { lat, lng } = createReportDto.coordinates;
-            const createCoordinateDto = new CreateCoordinateDto();
-            createCoordinateDto.lat = lat;
-            createCoordinateDto.lng = lng;
-            const coordinate = await this.coordinateService.createCoordinate(createCoordinateDto);
-            const createdReport = new this.reportModel({
-                    ...createReportDto,
-                    coordinates : coordinate._id,
-                });
+            const createdReport = new this.reportModel(createReportDto);
             return createdReport.save();
         }catch (error) {
             return error;
@@ -39,6 +30,7 @@ export class ReportService {
                 .find()
                 .populate('coordinates')
                 .populate("author")
+                .populate('cable')
                 .sort({createdAt: -1})
                 .exec();
             // go through all reports and remove password and salt from author
@@ -60,6 +52,7 @@ export class ReportService {
                 .findById(id)
                 .populate('coordinates')
                 .populate("author")
+                .populate('cable')
                 .exec();
             // go through all reports and remove password and salt from author
             report.author[0].password = "";
@@ -76,14 +69,6 @@ export class ReportService {
         try{
             const report = await this.reportModel.findById(id);
             if(report){
-                // if coordinates are changed, delete old coordinate and create new one
-                if(updateReportDto.coordinates){
-                    await this.coordinateService
-                        .updateCoordinate(
-                            report.coordinates.toString(),
-                            updateReportDto.coordinates,
-                        );
-                }
                 // if title is changed, update title
                 if(updateReportDto.title){
                     report.title = updateReportDto.title;
